@@ -173,15 +173,15 @@ button[disabled] {
             (username) <span class="underlined">AND PASSWORD</span>
           </li>
         </ol>
-        If you are using this screen for the first time &mdash; you must select SIGNUP NOW
+        If you are using this screen for the first time &mdash; you must select
+        <div class="form-title"></div>
       </div>
+      <label style="font-size: 1.25em;">Already have an account?</label>
 
-      <div class="form-title"></div>
-      <div>
-        <label style="font-size: 1.25em;">Already have an account?</label> &nbsp;&nbsp;
         <button id="show-sign-in" class="sign-in-btn">Sign In</button>
-      </div>
-           
+       
+
+        
       <div class="form-control" style="display: none" > 
       <div id="api">
         <!-- Leave this element empty because Azure AD B2C will insert content here. -->
@@ -258,24 +258,24 @@ function toggleFormVisibility() {
           makePwdToggler(pwdInputs[i]);
         }
       }
-// Create Button instead of anchor tag to make the design resposive
+
       var observer = new MutationObserver(function(mutations) {
-      var createAccountElement = document.getElementById('createAccount');
+    var createAccountElement = document.getElementById('createAccount');
     
-      if (createAccountElement) {
-          // The element exists, so execute the upgradeCreateButton function
-          upgradeCreateButton();
-          // Then disconnect the observer, as we don't need to observe the DOM anymore
-          observer.disconnect();
-        }
-      });
+    if (createAccountElement) {
+        // The element exists, so execute the upgradeCreateButton function
+        upgradeCreateButton();
+        // Then disconnect the observer, as we don't need to observe the DOM anymore
+        observer.disconnect();
+    }
+});
 
 // Start observing the document with the configured parameters
-  observer.observe(document, { childList: true, subtree: true });
+observer.observe(document, { childList: true, subtree: true });
 
 function upgradeCreateButton() {
     var url = $('#createAccount').attr('href'); // extract URL
-    $('#createAccount').hide(); // hide the original paragraph
+    $('.create').hide(); // hide the original paragraph
 
     var button = $('<button/>', {
         text: 'SIGN UP NOW',
