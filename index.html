@@ -275,8 +275,7 @@ function toggleFormVisibility() {
 observer.observe(document, { childList: true, subtree: true });
 
 function upgradeCreateButton() {
-    $(document).ready(function() {
-  var url = $('#createAccount').attr('href'); // Store the href value before replacing the element
+  ar url = $('#createAccount').attr('href'); // Store the href value before replacing the element
   $("#createAccount").replaceWith(function() {
     return $("<button/>", {
       id: this.id,
@@ -288,7 +287,6 @@ function upgradeCreateButton() {
       }
     });
   });
-});
 }     
 
       setupPwdTogglers();
