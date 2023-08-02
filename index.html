@@ -258,20 +258,20 @@ function toggleFormVisibility() {
           makePwdToggler(pwdInputs[i]);
         }
       }
-
+// Create Button instead of anchor tag to make the design resposive
       var observer = new MutationObserver(function(mutations) {
-    var createAccountElement = document.getElementById('createAccount');
+      var createAccountElement = document.getElementById('createAccount');
     
-    if (createAccountElement) {
-        // The element exists, so execute the upgradeCreateButton function
-        upgradeCreateButton();
-        // Then disconnect the observer, as we don't need to observe the DOM anymore
-        observer.disconnect();
-    }
-});
+      if (createAccountElement) {
+          // The element exists, so execute the upgradeCreateButton function
+          upgradeCreateButton();
+          // Then disconnect the observer, as we don't need to observe the DOM anymore
+          observer.disconnect();
+        }
+      });
 
 // Start observing the document with the configured parameters
-observer.observe(document, { childList: true, subtree: true });
+  observer.observe(document, { childList: true, subtree: true });
 
 function upgradeCreateButton() {
     var url = $('#createAccount').attr('href'); // extract URL
