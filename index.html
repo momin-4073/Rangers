@@ -260,35 +260,6 @@ function toggleFormVisibility() {
         }
       }
 
-      var observer = new MutationObserver(function(mutations) {
-    var createAccountElement = document.getElementById('createAccount');
-    
-    if (createAccountElement) {
-        // The element exists, so execute the upgradeCreateButton function
-        upgradeCreateButton();
-        // Then disconnect the observer, as we don't need to observe the DOM anymore
-        observer.disconnect();
-    }
-});
-
-// Start observing the document with the configured parameters
-observer.observe(document, { childList: true, subtree: true });
-
-function upgradeCreateButton() {
-  ar url = $('#createAccount').attr('href'); // Store the href value before replacing the element
-  $("#createAccount").replaceWith(function() {
-    return $("<button/>", {
-      id: this.id,
-      class: this.className,
-      text: $(this).text(),
-      style: $(this).attr('style'),
-      click: function(){
-        window.location.href = url; // On button click, redirect to the stored url
-      }
-    });
-  });
-}     
-
       function upgradeCreate() {
         $(".create").insertBefore(".form-title").css("font-size", "1.25em");
         $(".create a")
