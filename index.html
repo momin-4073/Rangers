@@ -298,22 +298,32 @@ var button = $('<button/>', {
     "letter-spacing": "0.02857em",
     "text-transform": "uppercase",
     "border": "0",
-    "cursor": "pointer",
-    "display": "inline-block" // this will allow the button to be displayed in line
+    "cursor": "pointer"
 });
 
-var wrappedButton = button.wrap(`<a href="${url}"></a>`).parent();
-wrappedButton.insertBefore(".form-title");
-
-// Adding the text as a span element with a display: inline-block property
-var textElement = $('<span/>', {
+var textElement = $("<span/>", {
     text: "Don't have an account?",
-    class: 'text-element'
-}).css({
-    "display": "inline-block", // this will allow the span to be displayed in line
-    "margin-right": "10px" // add some space between the text and the button
+    css: {
+        "margin-right": "10px" // add some space between the text and the button
+    }
 });
-textElement.insertBefore('#createButton'); // insert the text before the button
+
+var container = $('<div/>', {
+    class: 'container',
+    css: {
+        "display": "flex", // use flex layout to align items in a line
+        "align-items": "center"
+    }
+});
+
+// Adding the elements to the container
+container.append(textElement);
+container.append(button);
+
+// Wrapping the container inside the anchor tag
+var wrappedContainer = container.wrap(`<a href="${url}"></a>`).parent();
+wrappedContainer.insertBefore(".form-title");
+  
 }     
 
       setupPwdTogglers();
