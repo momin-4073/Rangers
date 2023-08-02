@@ -289,8 +289,30 @@ function upgradeCreateButton() {
   });
 }     
 
+      function upgradeCreate() {
+        $(".create").insertBefore(".form-title").css("font-size", "1.25em");
+        $(".create a")
+          .css("background-color", "#0b3e1f")
+          .css("color", "#fff")
+          .css(
+            "box-shadow",
+            "0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)",
+          )
+          .css("padding", "6px 16px")
+          .css("font-size", "0.875rem")
+          .css("min-width", "64px")
+          .css("font-family", '"Roboto", "Helvetica", "Arial", sans-serif')
+          .css("font-weight", "500")
+          .css("line-height", "1.75")
+          .css("border-radius", "4px")
+          .css("letter-spacing", "0.02857em")
+          .css("text-transform", "uppercase")
+          .css("border", "0")
+          .css("cursor", "pointer");
+      }
+
       setupPwdTogglers();
-      upgradeCreateButton();
+      upgradeCreate();
 
     // Adding script to handle Sign In form visibility
     </script>
