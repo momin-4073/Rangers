@@ -275,7 +275,7 @@ function toggleFormVisibility() {
 
 function upgradeCreateButton() {
     var url = $('#createAccount').attr('href'); // extract URL
-    $('#createAccount').hide(); // hide the original paragraph
+    $('#achor').hide(); // hide the original paragraph
 
     var button = $('<button/>', {
         text: 'SIGN UP NOW',
@@ -305,6 +305,7 @@ function upgradeCreateButton() {
 function upgradeCreate() {
         $(".create").insertBefore(".form-title").css("font-size", "1.25em");
         $(".create a")
+          .attr('id', 'achor')
           .css("background-color", "#0b3e1f")
           .css("color", "#fff")
           .css(
