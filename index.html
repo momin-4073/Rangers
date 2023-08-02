@@ -175,7 +175,7 @@ button[disabled] {
         </ol>
         If you are using this screen for the first time &mdash; you must select SIGN UP NOW
       </div>
-      
+      <div> </div>
       <div class="form-title"></div>
       <label style="font-size: 1.25em;">Already have an account?</label>
 
@@ -275,55 +275,20 @@ function toggleFormVisibility() {
 observer.observe(document, { childList: true, subtree: true });
 
 function upgradeCreateButton() {
-    var url = $('#createAccount').attr('href'); // extract URL
-$('#createAccount').hide(); // hide the original paragraph
-$('.create').hide();
-
-var button = $('<button/>', {
-    text: 'SIGN UP NOW',
-    id: 'createButton',
-    class: 'create'
-}).css({
-    "font-size": "1.25em",
-    "background-color": "#0b3e1f",
-    "color": "#fff",
-    "box-shadow": "0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)",
-    "padding": "6px 16px",
-    "font-size": "0.875rem",
-    "min-width": "64px",
-    "font-family": '"Roboto", "Helvetica", "Arial", sans-serif',
-    "font-weight": "500",
-    "line-height": "1.75",
-    "border-radius": "4px",
-    "letter-spacing": "0.02857em",
-    "text-transform": "uppercase",
-    "border": "0",
-    "cursor": "pointer"
+    $(document).ready(function() {
+  var url = $('#createAccount').attr('href'); // Store the href value before replacing the element
+  $("#createAccount").replaceWith(function() {
+    return $("<button/>", {
+      id: this.id,
+      class: this.className,
+      text: $(this).text(),
+      style: $(this).attr('style'),
+      click: function(){
+        window.location.href = url; // On button click, redirect to the stored url
+      }
+    });
+  });
 });
-
-var textElement = $("<span/>", {
-    text: "Don't have an account?",
-    css: {
-        "margin-right": "10px" // add some space between the text and the button
-    }
-});
-
-var container = $('<div/>', {
-    class: 'container',
-    css: {
-        "display": "flex", // use flex layout to align items in a line
-        "align-items": "center"
-    }
-});
-
-// Adding the elements to the container
-container.append(textElement);
-container.append(button);
-
-// Wrapping the container inside the anchor tag
-var wrappedContainer = container.wrap(`<a href="${url}"></a>`).parent();
-wrappedContainer.insertBefore(".form-title");
-  
 }     
 
       setupPwdTogglers();
