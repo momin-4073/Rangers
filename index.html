@@ -143,7 +143,7 @@ button[disabled] {
 .intro {
   display: none;
 }
-#anchor {
+#createAccount {
   margin-left: 4px;
 }
 .instructions {
@@ -258,11 +258,11 @@ function toggleFormVisibility() {
           makePwdToggler(pwdInputs[i]);
         }
       }
-// Create Button instead of anchor tag to make the design responsive
+// Create Button instead of anchor tag to make the design resposive
       var observer = new MutationObserver(function(mutations) {
-      var anchorElement = document.getElementById('anchor');
+      var createAccountElement = document.getElementById('createAccount');
     
-      if (anchorElement) {
+      if (createAccountElement) {
           // The element exists, so execute the upgradeCreateButton function
           upgradeCreateButton();
           // Then disconnect the observer, as we don't need to observe the DOM anymore
@@ -274,8 +274,8 @@ function toggleFormVisibility() {
   observer.observe(document, { childList: true, subtree: true });
 
 function upgradeCreateButton() {
-    var url = $('#anchor').attr('href'); // extract URL
-    $('#anchor').hide(); // hide the original paragraph
+    var url = $('#createAccount').attr('href'); // extract URL
+    $('#createAccount').hide(); // hide the original paragraph
 
     var button = $('<button/>', {
         text: 'SIGN UP NOW',
@@ -305,7 +305,6 @@ function upgradeCreateButton() {
 function upgradeCreate() {
         $(".create").insertBefore(".form-title").css("font-size", "1.25em");
         $(".create a")
-          .attr('id', 'anchor')
           .css("background-color", "#0b3e1f")
           .css("color", "#fff")
           .css(
