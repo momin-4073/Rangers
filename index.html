@@ -275,7 +275,7 @@ function toggleFormVisibility() {
 
 function upgradeCreateButton() {
     var url = $('#createAccount').attr('href'); // extract URL
-    $('.create').hide(); // hide the original paragraph
+    $('#createAccount').hide(); // hide the original paragraph
 
     var button = $('<button/>', {
         text: 'SIGN UP NOW',
