@@ -143,7 +143,7 @@ button[disabled] {
 .intro {
   display: none;
 }
-#createAccount {
+#anchor {
   margin-left: 4px;
 }
 .instructions {
@@ -258,11 +258,11 @@ function toggleFormVisibility() {
           makePwdToggler(pwdInputs[i]);
         }
       }
-// Create Button instead of anchor tag to make the design resposive
+// Create Button instead of anchor tag to make the design responsive
       var observer = new MutationObserver(function(mutations) {
-      var createAccountElement = document.getElementById('createAccount');
+      var anchorElement = document.getElementById('anchor');
     
-      if (createAccountElement) {
+      if (anchorElement) {
           // The element exists, so execute the upgradeCreateButton function
           upgradeCreateButton();
           // Then disconnect the observer, as we don't need to observe the DOM anymore
