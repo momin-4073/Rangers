@@ -174,14 +174,14 @@ button[disabled] {
           </li>
         </ol>
         If you are using this screen for the first time &mdash; you must select
-        <span class="underlined">SIGN UP NOW</span>.
+        <div class="form-title"></div>
       </div>
       <label style="font-size: 1.25em;">Already have an account?</label>
 
         <button id="show-sign-in" class="sign-in-btn">Sign In</button>
        
 
-      <div class="form-title"></div>  
+        
       <div class="form-control" style="display: none" > 
       <div id="api">
         <!-- Leave this element empty because Azure AD B2C will insert content here. -->
@@ -261,7 +261,7 @@ function toggleFormVisibility() {
 function upgradeCreateButton() {
     var url = $('#createAccount').attr('href'); // extract URL
 
-    $('#createAccount').hide(); // hide the original paragraph
+    $('.create').hide(); // hide the original paragraph
 
     var button = $('<button/>', {
         text: 'SIGN UP NOW',
