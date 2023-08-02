@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign In to Permit Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b3e1f" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://bhpermitportal.azurewebsites.net/b2c/style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://bhpermitportal.azurewebsites.net/b2c/UnifiedSignUpSignIn.css"
+    />
+
+<style> 
+/* Universal default styles */
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+}
+.error {
+  color: red;
+}
+.error[aria-hidden="true"] {
+  display: none;
+}
+.error p {
+  margin-top: 0.3em;
+  margin-bottom: 0.1em;
+}
+.container {
+  width: 100%;
+  padding: 16px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Form Fields */
+.entry {
+  display: flex;
+  flex-direction: column;
+}
+.entry-item,
+.attrEntry {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.entry-item label,
+.attrEntry label {
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: 0.00938em;
+  font-weight: 500;
+}
+.entry-item input,
+.attrEntry input {
+  padding: 10.5px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.1876em;
+  letter-spacing: 0.00938em;
+}
+.password-label {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Buttons */
+button {
+  background-color: #0b3e1f;
+  color: #fff;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+}
+button[disabled] {
+  background-color: #3d5c49;
+  cursor: not-allowed;
+}
+
+.main-title {
+  color: #7a171c;
+  text-align: center;
+}
+.container {
+  width: 100%;
+  padding: 16px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.powered-by {
+  width: 100%;
+  max-width: 200px;
+  margin: auto;
+  text-align: center;
+}
+#logo {
+  display: block;
+  width: 100%;
+}
+#logoCaption {
+  color: grey;
+}
+.form-title {
+  color: #7a171c;
+}
+.divider,
+.intro {
+  display: none;
+}
+#createAccount {
+  margin-left: 4px;
+}
+.instructions {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  border-radius: 4px;
+  padding: 4px 8px;
+  border-left: 4px solid rgb(11, 62, 31);
+  margin-bottom: 8px;
+}
+.underlined {
+  text-decoration: underline;
+}
+
+</style>
+  </head>
+  <body>
+    <h1 class="main-title">Welcome to the Permit Portal!</h1>
+    <div class="container">
+      <div>
+        This step provides individualized access to the Permit Portal. From this
+        screen you can:
+        <ol>
+          <li>SIGN-UP &mdash; to Create a new account, or</li>
+          <li>
+            SIGN-IN &mdash; IF you have previously entered both an email address
+            (username) <span class="underlined">AND PASSWORD</span>
+          </li>
+        </ol>
+        If you are using this screen for the first time &mdash; you must select
+        <span class="underlined">SIGN UP NOW</span>.
+      </div>
+      <label style="font-size: 1.25em;">Already have an account?</label>
+
+        <button id="show-sign-in" class="sign-in-btn">Sign In</button>
+       
+
+      <div class="form-title"></div>  
+      <div class="form-control" style="display: none" > 
+      <div id="api">
+        <!-- Leave this element empty because Azure AD B2C will insert content here. -->
+      </div>
+      </div> 
+      <div class="powered-by">
+        <img
+          id="logo"
+          src="https://bhpermitportal.azurewebsites.net/b2c/Ranger.png"
+          aria-describedby="logoCaption"
+        />
+        <span id="logoCaption">Powered by RangerSST</span>
+      </div>
+    </div>
+    <script>
+function toggleFormVisibility() {
+  var signinForm = document.querySelector(".form-control");
+  if (signinForm.style.display === "none") {
+    signinForm.style.display = "block";
+  } else {
+    signinForm.style.display = "none";
+  }
+}
+      document.querySelector(".sign-in-btn").addEventListener("click", function () {
+        toggleFormVisibility();
+      });
+      (function () {
+        // The forgot password redirects to the app with an error.
+        // Instead, have it go straight to the reset screen.
+        $("#forgotPassword").click(function (e) {
+          e.preventDefault();
+          window.location.href = window.location.href.replace(
+            /B2C_1_signupsignin1/gi,
+            "B2C_1_passwordreset1",
+          );
+        });
+      })();
+
+
+      function makePwdToggler(pwd) {
+        // Create show-password checkbox
+        var checkbox = document.createElement("input");
+        checkbox.setAttribute("type", "checkbox");
+        var id = pwd.id + "toggler";
+        checkbox.setAttribute("id", id);
+
+        var label = document.createElement("label");
+        label.setAttribute("for", id);
+        label.appendChild(document.createTextNode("show password"));
+
+        var div = document.createElement("div");
+        div.appendChild(checkbox);
+        div.appendChild(label);
+
+        // Add show-password checkbox under password input
+        pwd.insertAdjacentElement("afterend", div);
+
+        // Add toggle password callback
+        function toggle() {
+          if (pwd.type === "password") {
+            pwd.type = "text";
+          } else {
+            pwd.type = "password";
+          }
+        }
+        checkbox.onclick = toggle;
+        // For non-mouse usage
+        checkbox.onkeydown = toggle;
+      }
+
+      function setupPwdTogglers() {
+        var pwdInputs = document.querySelectorAll("input[type=password]");
+        for (var i = 0; i < pwdInputs.length; i++) {
+          makePwdToggler(pwdInputs[i]);
+        }
+      }
+
+      function upgradeCreate() {
+        $(".create").insertBefore(".form-title").css("font-size", "1.25em");
+        $(".create a")
+          .css("background-color", "#0b3e1f")
+          .css("color", "#fff")
+          .css(
+            "box-shadow",
+            "0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)",
+          )
+          .css("padding", "6px 16px")
+          .css("font-size", "0.875rem")
+          .css("min-width", "64px")
+          .css("font-family", '"Roboto", "Helvetica", "Arial", sans-serif')
+          .css("font-weight", "500")
+          .css("line-height", "1.75")
+          .css("border-radius", "4px")
+          .css("letter-spacing", "0.02857em")
+          .css("text-transform", "uppercase")
+          .css("border", "0")
+          .css("cursor", "pointer");
+      }
+
+      setupPwdTogglers();
+      upgradeCreate();
+    // Adding script to handle Sign In form visibility
+    </script>
+  </body>
+</html>
