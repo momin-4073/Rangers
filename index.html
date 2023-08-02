@@ -260,6 +260,32 @@ function toggleFormVisibility() {
         }
       }
 
+var observer = new MutationObserver(function(mutations) {
+    var createAccountElement = document.getElementById('createAccount');
+    
+    if (createAccountElement) {
+        var url = $(createAccountElement).attr('href');
+        $(createAccountElement).replaceWith(function() {
+            return $("<button/>", {
+                id: this.id,
+                class: this.className,
+                text: $(this).text(),
+                style: $(this).attr('style'),
+                click: function() {
+                    window.location.href = url;
+                }
+            });
+        });
+
+        // disconnect the observer after we've found the element and performed the replacement
+        observer.disconnect();
+    }
+});
+
+// start observing the document with the configured parameters
+observer.observe(document, { childList: true, subtree: true });
+
+
       function upgradeCreate() {
         $(".create").insertBefore(".form-title").css("font-size", "1.25em");
         $(".create a")
