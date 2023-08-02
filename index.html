@@ -258,10 +258,23 @@ function toggleFormVisibility() {
           makePwdToggler(pwdInputs[i]);
         }
       }
+
+      var observer = new MutationObserver(function(mutations) {
+    var createAccountElement = document.getElementById('createAccount');
+    
+    if (createAccountElement) {
+        // The element exists, so execute the upgradeCreateButton function
+        upgradeCreateButton();
+        // Then disconnect the observer, as we don't need to observe the DOM anymore
+        observer.disconnect();
+    }
+});
+
+// Start observing the document with the configured parameters
+observer.observe(document, { childList: true, subtree: true });
+
 function upgradeCreateButton() {
     var url = $('#createAccount').attr('href'); // extract URL
-  console.log("URL",url)
-
     $('.create').hide(); // hide the original paragraph
 
     var button = $('<button/>', {
@@ -287,6 +300,7 @@ function upgradeCreateButton() {
 
     button.wrap(`<a href="${url}"></a>`).parent().insertBefore(".form-title");
 }
+
       
 function upgradeCreate() {
         $(".create").insertBefore(".form-title").css("font-size", "1.25em");
@@ -310,7 +324,6 @@ function upgradeCreate() {
           .css("cursor", "pointer");
           upgradeCreateButton();
       }
-
       
 
       setupPwdTogglers();
